@@ -12,6 +12,7 @@ express()
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
     log(`${new Date()}`)
     log(`New connection from: ${ip}`)
+    log(res.body)
     res.sendStatus(200)
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
