@@ -8,9 +8,8 @@ const log = (...args) => {
 }
 
 express()
-  .get('/', (req, res) => {
-    // let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-    let ip = 420
+  .get(/(\/)|(^$)/, (req, res) => {
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
     log(`${new Date()}`)
     log(`New connection from: ${ip}`)
     res.sendStatus(200)
