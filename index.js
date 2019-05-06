@@ -9,9 +9,10 @@ const log = (...args) => {
 
 express()
   .get('/', (req, res) => {
-    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-    res.sendStatus(200)
+    // let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+    let ip = 420
     log(`${new Date()}`)
     log(`New connection from: ${ip}`)
+    res.sendStatus(200)
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
