@@ -1,0 +1,14 @@
+{
+  "name": "cl-listener",
+  "engines": {
+    "node": "11.10.0"
+  },
+  "main": "index.js",
+  "version": "1.0.0",
+  "repository": "https://github.com/stofi/cl-listener",
+  "author": "Kryštof Rainisch <krystof.rainisch@sprites.co>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
