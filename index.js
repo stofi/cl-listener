@@ -21,7 +21,7 @@ app.all('/', async (req, res) => {
     let ids = []
     data.forEach(entry=>{
       let pid = entry.assignment.project_id
-      if (ids.indexOf(pid) === -1) ids.push(pid)
+      if (pid !== null && ids.indexOf(pid) === -1) ids.push(pid)
     })
     log('Data:\n')
     log(data)
