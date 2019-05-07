@@ -29,7 +29,7 @@ app.all('/', async (req, res) => {
     log(ids)
     log('Budgets:')
     for (id of ids) {
-      let budget = await getBudget(id)
+      let budget = await getBudget({id})
       log(id, budget)
     }
   })
