@@ -1,11 +1,8 @@
-const package = require('./package')
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
+const { log } = require('./app/lib/utils')
 
-const log = (...args) => {
-  console.log(`[${package.name}]`, ...args)
-}
 
 express()
   .all('/', (req, res) => {
