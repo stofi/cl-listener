@@ -23,11 +23,11 @@ app.all('/', async (req, res) => {
       let pid = entry.assignment.project_id
       if (pid !== null && ids.indexOf(pid) === -1) ids.push(pid)
     })
-    log('Data:\n')
+    log('Data:')
     log(data)
-    log('IDs:\n')
+    log('IDs:')
     log(ids)
-    log('Budgets:\n')
+    log('Budgets:')
     for (id of ids) {
       let budget = await getBudget(id)
       log(id, budget)
