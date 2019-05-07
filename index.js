@@ -6,9 +6,7 @@ const { log } = require('./app/lib/utils')
 
 const app = express()
 
-app.use(bodyParser.json({
-  type: 'application/*+json'
-}))
+app.use(bodyParser.json())
 
 app.all('/', (req, res) => {
     res.sendStatus(200)
