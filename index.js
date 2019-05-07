@@ -1,18 +1,19 @@
-const package = require('./package')
 const express = require('express')
+const bodyParser = require('body-parser')
 const path = require('path')
 const PORT = process.env.PORT || 5000
+const { log } = require('./app/lib/utils')
 
-const log = (...args) => {
-  console.log(`[${package.name}]`, ...args)
-}
+const app = express()
 
-express()
-  .all('/', (req, res) => {
+app.use(bodyParser.json())
+
+app.all('/', (req, res) => {
+    res.sendStatus(200)
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
     log(`${new Date()}`)
     log(`New connection from: ${ip}`)
-    log(req.body)
-    res.sendStatus(200)
+    let data = req.body.data.map(entry => entry.data )
+    log('\n', data)
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
