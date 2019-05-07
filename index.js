@@ -6,10 +6,9 @@ const { log } = require('./app/lib/utils')
 
 express()
   .all('/', (req, res) => {
+    res.sendStatus(200)
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
     log(`${new Date()}`)
     log(`New connection from: ${ip}`)
-    log(req.body)
-    res.sendStatus(200)
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
