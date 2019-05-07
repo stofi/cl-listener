@@ -23,6 +23,8 @@ app.all('/', async (req, res) => {
       let pid = entry.assignment.project_id
       if (pid !== null && ids.indexOf(pid) === -1) ids.push(pid)
     })
+    if(ids.length === 0) return
+
     log('Data:')
     log(data)
     log('IDs:')
