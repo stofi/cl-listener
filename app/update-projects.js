@@ -1,9 +1,9 @@
+const mongoose = require('mongoose');
 const controller = require('./controller')
-const db = require('./database')
 const { log } = require('./lib/utils')
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost"
 
-db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', async function() {
+const main = async () => {
 
   const projects = [...await controller.index()]
   let ids = projects.map(project=>project.id)
@@ -48,4 +48,16 @@ db.once('open', async function() {
   //   })
   db.close()
   log('closed the database connection')
-})
+}
+
+
+
+module.exports = async function updateProjects() {
+  const db = mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    dbName: 'cl-test-db'
+  })
+
+  db.on('error', console.error.bind(console, 'connection error:'))
+  db.once('open', main)
+}
