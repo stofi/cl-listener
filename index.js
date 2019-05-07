@@ -13,6 +13,7 @@ app.all('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
     log(`${new Date()}`)
     log(`New connection from: ${ip}`)
-    log('\n', req.body.data)
+    let data = req.body.data.map(entry => entry.data )
+    log('\n', data)
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
