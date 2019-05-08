@@ -3,12 +3,16 @@ const Schema = mongoose.Schema;
 
 const Project = new Schema({
   id: String,
+  createdAt: Date,
+  updatedAt: Date,
   name: String,
   allocated: Number,
   spent: Number,
-  createdAt: Date,
-  updatedAt: Date,
-  didNotify: Boolean
+  activity: String,
+  person: String,
+  task: String,
+  didNotify: Boolean,
+
 });
 
 module.exports = {

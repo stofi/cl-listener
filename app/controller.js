@@ -11,20 +11,23 @@ module.exports = {
     })
   },
 
-  store: ({id, name, allocated}) => {
-    if (!id) {
+  store: (options) => {
+    if (!options.id) {
       return new Promise((resolve, reject) => {
         reject(new Error('New Project has to have an ouside ID'))
       })
     }
     const creationDate = new Date();
     const data = {
-      id: id,
-      name: name,
-      allocated: allocated,
-      spent: 0,
+      id: options.id,
       createdAt: creationDate,
       updatedAt: creationDate,
+      name: options.name,
+      allocated: options.allocated,
+      spent: options.spent,
+      activity: options.activity,
+      person: options.person,
+      task: options.task,
       didNotify: false
     };
     return new Promise((resolve, reject) => {
@@ -54,11 +57,21 @@ module.exports = {
     })
   },
 
-  update: ({id, spent}) => {
+  update: (options) => {
+    const updateDate = new Date()
+    let id = options.id
     return new Promise((resolve, reject) => {
       Project.findOne({id})
         .then(p=>{
-          p.spent = spent
+          p.updatedAt = updateDate
+          p.spent = options.spent || p.spent
+          p.name = options.name || p.name
+          p.allocated = options.allocated || p.allocated
+          p.spent = options.spent || p.spent
+          p.activity = options.activity || p.activity
+          p.person = options.person || p.person
+          p.task = options.task || p.task
+          p.didNotify = false
           return p.save()
         })
         .then(resolve)
@@ -67,9 +80,11 @@ module.exports = {
   },
 
   finnish: ({id}) => {
+    const updateDate = new Date()
     return new Promise((resolve, reject) => {
       Project.findOne({id})
         .then(p=>{
+          p.updatedAt = updateDate
           p.didNotify = true
           return p.save()
         })
