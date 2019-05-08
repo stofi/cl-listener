@@ -11,4 +11,6 @@ const Project = new Schema({
   didNotify: Boolean
 });
 
-module.exports = mongoose.model("project", Project)
+module.exports = {
+  Project: mongoose.model("project", Project)
+}
