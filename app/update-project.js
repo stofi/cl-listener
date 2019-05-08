@@ -12,7 +12,7 @@ module.exports = async function updateProject(project) {
     .then(async mg => {
       // Get project from db
       const stored = [...await controller.get({
-        id: options.id
+        id: project.id
       })]
 
       if (stored.length === 1) {
