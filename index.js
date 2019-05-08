@@ -41,13 +41,8 @@ app.all('/', async (req, res) => {
     })
     if(ids.length === 0) return
 
-    log('Data:')
-    log(data)
-    log('Projects:')
-    log(projects)
-    log('IDs:')
-    log(ids)
-    log('Budgets:')
+    log(`Processing ${ids.length} events`)
+
     for (project of projects) {
       let id = project.id
       let budget = await getBudget({id})
