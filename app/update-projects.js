@@ -34,18 +34,6 @@ const main = async () => {
       log(`problem deleting ${project.id}`)
     })
 
-  // await controller
-  //   .update({
-  //     id: '4',
-  //     spent: 512
-  //   })
-  //   .then((res)=>{
-  //     log('updated', res)
-  //   })
-  //   .catch((err) => log)
-  //   .finally(()=>{
-  //     db.close()
-  //   })
   db.close()
   log('closed the database connection')
 }
