@@ -27,9 +27,6 @@ app.all('/', async (req, res) => {
         return true
       } else return false
     })
-    let projects = data.map(event=>({
-
-    }))
     let projects = data.map(event=> ({
       id: event.assignment.project_id,
       name: event.names.project_name,
