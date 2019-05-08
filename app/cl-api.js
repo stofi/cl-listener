@@ -33,9 +33,4 @@ const getProjectBudget = async ({id}) => {
   })
 }
 
-// getProjectBudget({id:124868})
-//   .then(console.log)
-//   .catch(console.log)
-//
-
 module.exports = getProjectBudget
