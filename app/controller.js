@@ -4,10 +4,10 @@ module.exports = {
   index: () => {
     return new Promise((resolve, reject) => {
       Project.find()
-      .sort({ createdAt: -1 })
-      .lean()
-      .then(resolve)
-      .catch(reject)
+        .sort({ createdAt: -1 })
+        .lean()
+        .then(resolve)
+        .catch(reject)
     })
   },
 
@@ -32,20 +32,20 @@ module.exports = {
     };
     return new Promise((resolve, reject) => {
       Project.create(data)
-      .then(() =>
-        resolve(data)
-      )
-      .catch(reject)
+        .then(() =>
+          resolve(data)
+        )
+        .catch(reject)
     })
   },
 
   get: ({id}) => {
     return new Promise((resolve, reject) => {
       Project.find({id})
-      .sort({ createdAt: -1 })
-      .lean()
-      .then(resolve)
-      .catch(reject)
+        .sort({ createdAt: -1 })
+        .lean()
+        .then(resolve)
+        .catch(reject)
     })
   },
 
