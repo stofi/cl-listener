@@ -37,7 +37,7 @@ module.exports = async function updateProject(project) {
         await controller
           .update(project)
           .then(project => {
-            log(`adedd ${project.id}`)
+            log(`added ${project.id}`)
           })
           .catch(project => {
             log(`problem adding ${project.id}`)
