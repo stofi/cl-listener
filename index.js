@@ -4,6 +4,7 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 const { log } = require('./app/lib/utils')
 const getBudget = require('./app/cl-api')
+const updateProject = require('./app/update-project')
 
 const app = express()
 
@@ -49,6 +50,7 @@ app.all('/', async (req, res) => {
       project.allocated = budget.allocated
       project.spent = budget.spent
       log(project)
+      updateProject(project)
       // dont just log this
       // now it's time to use the database
     }
