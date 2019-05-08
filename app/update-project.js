@@ -4,44 +4,45 @@ const { log } = require('./lib/utils')
 const mongoURI = process.env.MONGO_URI || "mongodb://localhost"
 
 module.exports = async function updateProject(project) {
-  const db = mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    dbName: 'cl-test-db'
-  })
+  mongoose
+    .connect(mongoURI, {
+      useNewUrlParser: true,
+      dbName: 'cl-test-db'
+    })
+    .then(async mg => {
+      // Get project from db
+      const stored = [...await controller.get({
+        id: options.id
+      })]
 
-  db.on('error', console.error.bind(console, 'connection error:'))
-  db.once('open', async () => {
-
-    const stored = [...await controller.get({
-      id: options.id
-    })]
-
-    if (stored.length === 1) {
-      // Project is in the database
-      await controller
-        .update(project)
-        .then(project => {
-          log(`updating ${project.id}`)
-        })
-        .catch(project => {
-          log(`problem updating ${project.id}`)
-        })
+      if (stored.length === 1) {
+        // Project is in the database
+        await controller
+          .update(project)
+          .then(project => {
+            log(`updating ${project.id}`)
+          })
+          .catch(project => {
+            log(`problem updating ${project.id}`)
+          })
 
 
-    } else if (project.spent > project.allocated) {
-      // Project is not in the db but is spent
-      await controller
-        .update(project)
-        .then(project => {
-          log(`adding ${project.id}`)
-        })
-        .catch(project => {
-          log(`problem adding ${project.id}`)
-        })
-    }
-    // Ignore projects that are not in db and are not spent
+      } else if (project.spent > project.allocated) {
+        // Project is not in the db but is spent
+        await controller
+          .update(project)
+          .then(project => {
+            log(`adding ${project.id}`)
+          })
+          .catch(project => {
+            log(`problem adding ${project.id}`)
+          })
+      }
+      // Ignore projects that are not in db and are not spent
 
-    db.close()
-    log('closed the database connection')
-  })
+      mg.connection.close()
+      log('Closed the database connection')
+    })
+    .catch(log)
+
 }

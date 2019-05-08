@@ -5,29 +5,32 @@ const { log } = require('./lib/utils')
 const mongoURI = process.env.MONGO_URI || "mongodb://localhost"
 
 module.exports = async function deleteAllProjects() {
-  const db = mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    dbName: 'cl-test-db'
-  })
+  mongoose
+    .connect(mongoURI, {
+      useNewUrlParser: true,
+      dbName: 'cl-test-db'
+    })
+    .then(async mg=>{
+      const projects = [...await controller.index()]
+      let ids = projects.map(project=>project.id)
 
-  db.on('error', console.error.bind(console, 'connection error:'))
-  db.once('open', () =>
-    const projects = [...await controller.index()]
-    let ids = projects.map(project=>project.id)
+      log("Deleting everything")
 
-    log("Deleting everything")
+      for (id of ids) {
+        await controller
+          .delete({id})
+          .then(t => {
+            log(`  - deleting ${id}`)
+          })
+          .catch(t => {
+            log(`  - problem deleting ${id}`)
+          })
+      }
+      mg.connection.close()
+      log('Closed the database connection')
+    })
+    .catch(log)
 
-    for (id of ids) {
-      await controller
-        .delete({id})
-        .then(t => {
-          log(`  - deleting ${id}`)
-        })
-        .catch(t => {
-          log(`  - problem deleting ${id}`)
-        })
-    }
-    db.close()
-    log('closed the database connection')
-  })
 }
+
+module.exports()
