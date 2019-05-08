@@ -16,8 +16,6 @@ const getProjectBudget = async ({id}) => {
       .then((response)=>{
         let activities = response.data.data.items.filter(entry=>entry.item.type==='activity')
 
-
-
         let timeBudget = {
           allocated: 0,
           spent: 0
