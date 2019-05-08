@@ -33,6 +33,8 @@ app.all('/', async (req, res) => {
     for (id of ids) {
       let budget = await getBudget({id})
       log(id, budget)
+      // dont just log this
+      // now it's time to use the database
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
