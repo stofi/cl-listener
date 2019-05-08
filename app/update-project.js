@@ -35,7 +35,7 @@ module.exports = async function updateProject(project) {
         log('adding', project)
         // Project is not in the db but is spent
         await controller
-          .update(project)
+          .store(project)
           .then(project => {
             log(`added ${project.id}`)
           })
