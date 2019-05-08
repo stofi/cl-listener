@@ -49,7 +49,6 @@ app.all('/', async (req, res) => {
       let budget = await getBudget({id})
       project.allocated = budget.allocated
       project.spent = budget.spent
-      log(project)
       updateProject(project)
       // dont just log this
       // now it's time to use the database
