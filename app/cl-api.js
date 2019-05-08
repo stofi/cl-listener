@@ -22,8 +22,10 @@ const getProjectBudget = async ({id}) => {
         }
         if (activities.length === 0) reject(timeBudget)
 
-        activities.forEach(act => timeBudget.allocated += act.hours.budget)
-        activities.forEach(act => timeBudget.spent += act.hours.tracked)
+        activities.forEach(act => {
+          timeBudget.allocated += act.hours.budget
+          timeBudget.spent += act.hours.tracked
+        })
 
         resolve(timeBudget)
       })
