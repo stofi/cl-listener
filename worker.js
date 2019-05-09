@@ -32,7 +32,10 @@ mongoose
           Time: ${(project.allocated).toFixed(2)}/${(project.spent).toFixed(2)}
         `
       }
-      await mailgun.messages().send(data).catch(log)
+      let id = project.id
+      await mailgun.messages().send(data)
+        .then(()=>controller.finnish({id}))
+        .catch(log)
     }
 
     mg.connection.close()
