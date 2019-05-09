@@ -1,6 +1,7 @@
 const apiKey = process.env.MAILGUN_API_KEY
 const domain = process.env.MAILGUN_DOMAIN
 const CLIENT_EMAIL_ADDRESS = process.env.CLIENT_EMAIL_ADDRESS
+const SENDER_EMAIL_ADDRESS = process.env.SENDER_EMAIL_ADDRESS
 
 const mailgun = require('mailgun-js')({apiKey, domain})
 const mongoose = require('mongoose');
@@ -20,6 +21,7 @@ mongoose
 
     for (project of projects) {
       let data = {
+        from: SENDER_EMAIL_ADDRESS,
         to: CLIENT_EMAIL_ADDRESS,
         subject: `Exceeded allocated time on ${project.name}`,
         text: `
