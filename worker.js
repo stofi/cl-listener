@@ -32,9 +32,10 @@ mongoose
           Time: ${(project.allocated).toFixed(2)}/${(project.spent).toFixed(2)}
         `
       }
-      await mailgun.messages().send(data)
+      await mailgun.messages().send(data).catch(log)
     }
 
+    mg.connection.close()
     log('Closed the database connection')
   })
   .catch(log)
